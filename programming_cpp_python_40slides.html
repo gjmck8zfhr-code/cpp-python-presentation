@@ -1,1 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming: C++ & Python - 40 Slides</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
 
+.container {
+  max-width: 900px;
+  width: 100%;
+  background: #0f172a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  border: 1px solid #334155;
+}
+
+.header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+  padding: 20px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #334155;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.header-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.header-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.badge-counter {
+  background: #1e293b;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.badge-section {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.progress-container {
+  height: 3px;
+  background: #1e293b;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 2.5%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transition: width 0.4s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+.slide-area {
+  padding: 32px 36px;
+  min-height: 420px;
+  position: relative;
+}
+
+.slide-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin-bottom: 8px;
+}
+
+.slide-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.slide-content {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.code-block {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  margin: 16px 0;
+}
+
+.code-header {
+  background: #2d2d2d;
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.code-filename {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #888;
+  font-family: 'Fira Code', Consolas, monospace;
+}
+
+pre {
+  padding: 18px 22px;
+  margin: 0;
+  font-family: 'Fira Code', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #d4d4d4;
+  overflow-x: auto;
+}
+
+.keyword { color: #c586c0; }
+.type { color: #569cd6; }
+.string { color: #ce9178; }
+.number { color: #b5cea8; }
+.comment { color: #6a9955; }
+.function { color: #dcdcaa; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.card {
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  padding: 22px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #334155;
+}
+
+.card-icon { font-size: 32px; margin-bottom: 10px; }
+.card-title { font-size: 14px; font-weight: 700; color: #f8fafc; }
+.card-desc { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+
+.info-box {
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.info-box-text { font-size: 14px; color: #f8fafc; }
+
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6, #10b981);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.timeline-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: -24px;
+  border: 3px solid #0f172a;
+}
+
+.timeline-content {
+  background: #1e293b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  flex: 1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+th {
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  padding: 14px 16px;
+  text-align: left;
+  color: #f8fafc;
+  font-weight: 700;
+  border-bottom: 2px solid #334155;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #334155;
+}
+
+tr:nth-child(odd) { background: #1e293b; }
+tr:nth-child(even) { background: #0f172a; }
+
+.nav-bar {
+  padding: 20px 28px;
+  background: #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #334155;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #334155;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover { background: #475569; }
+
+.nav-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(59,130,246,0.3);
+}
+
+.nav-btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dots-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.dot-nav {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.dot-nav:hover { background: #64748b; }
+.dot-nav.active {
+  background: #3b82f6;
+  box-shadow: 0 0 8px rgba(59,130,246,0.5);
+}
+
+.footer-hint {
+  text-align: center;
+  padding: 8px;
+  background: #0f172a;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.slide { display: none; animation: fadeIn 0.3s ease; }
+.slide.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.center-content {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.big-icon { font-size: 80px; margin-bottom: 20px; }
+.big-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.big-subtitle { font-size: 14px; color: #94a3b8; margin-bottom: 24px; }
+
+.side-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.side-card {
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  padding: 20px 30px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.side-card-title { font-size: 28px; font-weight: 800; }
+.side-card-blue { color: #3b82f6; }
+.side-card-yellow { color: #f59e0b; }
+.side-card-desc { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+
+.list-item {
+  background: #1e293b;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border-left: 3px solid #3b82f6;
+}
+
+.list-item-title { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 6px; }
+.list-item-text { font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+
+.tag-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.tag-blue { background: #3b82f6; }
+.tag-purple { background: #8b5cf6; }
+.tag-green { background: #10b981; }
+.tag-red { background: #ef4444; }
+.tag-orange { background: #f59e0b; }
+
+.h-card {
+  background: #1e293b;
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  border: 1px solid #334155;
+}
+
+.h-card-icon { font-size: 24px; }
+.h-card-title { font-size: 14px; font-weight: 700; color: #f8fafc; }
+.h-card-desc { font-size: 13px; color: #94a3b8; }
+
+.small-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.small-card {
+  background: #1e293b;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.small-card-title { font-size: 13px; font-weight: 700; }
+.small-card-desc { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+
+@media (max-width: 600px) {
+  .card-grid, .small-grid { grid-template-columns: 1fr; }
+  .side-cards { flex-direction: column; align-items: center; }
+  .slide-area { padding: 20px; min-height: 300px; }
+  .header { flex-direction: column; gap: 10px; }
+  .nav-bar { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">💻</div>
+      <div>
+        <div class="header-title">Programming: C++ & Python</div>
+        <div class="header-subtitle">40 Slides Interactive Deck</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="badge-counter" id="slideCounter">1 / 40</span>
+      <span class="badge-section" id="sectionBadge">INTRO</span>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="slide-area" id="slideArea">
+
+    <!-- Slide 1 -->
+    <div class="slide active" data-section="INTRO">
+      <div class="center-content">
+        <div class="big-icon">💻</div>
+        <div class="big-title" style="color:#f8fafc;">The World of Programming: C++ & Python</div>
+        <div class="big-subtitle">From Low-Level Power to High-Level Simplicity</div>
+        <div class="side-cards">
+          <div class="side-card">
+            <div class="side-card-title side-card-blue">C++</div>
+            <div class="side-card-desc">Power & Speed</div>
+          </div>
+          <div class="side-card">
+            <div class="side-card-title side-card-yellow">Python</div>
+            <div class="side-card-desc">Simplicity & AI</div>
+          </div>
+        </div>
+        <div style="margin-top:20px;font-size:14px;color:#94a3b8;">A Complete 40-Slide Journey</div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">What is Programming?</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#3b82f6;">
+          <div class="list-item-title">🎯 Definition</div>
+          <div class="list-item-text">Programming is the process of writing instructions for computers to execute.</div>
+        </div>
+        <div class="list-item" style="border-left-color:#8b5cf6;">
+          <div class="list-item-title">🌉 The Bridge</div>
+          <div class="list-item-text">It bridges human ideas and machine operations.</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-title">💡 Analogy</div>
+          <div class="list-item-text">Think of it as teaching a computer how to solve problems step by step.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">Why Learn Programming?</div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <div class="card-title">High Demand</div>
+          <div class="card-desc">Fastest-growing jobs globally</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">Problem Solving</div>
+          <div class="card-desc">Logical & analytical thinking</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">Creativity</div>
+          <div class="card-desc">Build games, AI, anything!</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <div class="card-title">Financial Reward</div>
+          <div class="card-desc">Among highest-paid pros</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">The Evolution of Programming</div>
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#3b82f6;"></div>
+          <div class="timeline-content">
+            <span style="color:#3b82f6;font-weight:700;">1940s</span> <span style="color:#cbd5e1;">— Machine language (binary)</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#6366f1;"></div>
+          <div class="timeline-content">
+            <span style="color:#6366f1;font-weight:700;">1950s</span> <span style="color:#cbd5e1;">— Assembly & FORTRAN</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#8b5cf6;"></div>
+          <div class="timeline-content">
+            <span style="color:#8b5cf6;font-weight:700;">1970s</span> <span style="color:#cbd5e1;">— C language revolution</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#a855f7;"></div>
+          <div class="timeline-content">
+            <span style="color:#a855f7;font-weight:700;">1980s</span> <span style="color:#cbd5e1;">— C++ (OOP introduced)</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#10b981;"></div>
+          <div class="timeline-content">
+            <span style="color:#10b981;font-weight:700;">1991</span> <span style="color:#cbd5e1;">— Python created by Guido van Rossum</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#f59e0b;"></div>
+          <div class="timeline-content">
+            <span style="color:#f59e0b;font-weight:700;">2000s–Now</span> <span style="color:#cbd5e1;">— Web, Mobile, AI, Data Science</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">Types of Programming Languages</div>
+      <div class="slide-content">
+        <div class="h-card">
+          <div class="h-card-icon">🔧</div>
+          <div>
+            <div class="h-card-title">Low-Level Languages</div>
+            <div class="h-card-desc">Close to hardware — Assembly, Machine Code</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">📖</div>
+          <div>
+            <div class="h-card-title">High-Level Languages</div>
+            <div class="h-card-desc">Human-readable — Python, Java, C++</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">⚡</div>
+          <div>
+            <div class="h-card-title">Compiled Languages</div>
+            <div class="h-card-desc">Translated before running — C++</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">▶️</div>
+          <div>
+            <div class="h-card-title">Interpreted Languages</div>
+            <div class="h-card-desc">Executed line by line — Python</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">C++ — An Overview</div>
+      <div class="center-content">
+        <div class="big-icon">⚡</div>
+        <div class="big-title" style="color:#3b82f6;">C++</div>
+        <div class="big-subtitle">"Close to the metal"</div>
+        <div style="display:grid;gap:12px;text-align:left;max-width:500px;margin:0 auto;width:100%;">
+          <div class="list-item" style="border-left-color:#3b82f6;">
+            <span style="color:#3b82f6;font-weight:600;">Creator:</span> <span style="color:#cbd5e1;">Bjarne Stroustrup (1985)</span>
+          </div>
+          <div class="list-item" style="border-left-color:#3b82f6;">
+            <span style="color:#3b82f6;font-weight:600;">Origin:</span> <span style="color:#cbd5e1;">Extension of C with OOP features</span>
+          </div>
+          <div class="list-item" style="border-left-color:#3b82f6;">
+            <span style="color:#3b82f6;font-weight:600;">Known for:</span> <span style="color:#cbd5e1;">Performance, speed, and control</span>
+          </div>
+          <div class="list-item" style="border-left-color:#3b82f6;">
+            <span style="color:#3b82f6;font-weight:600;">Best for:</span> <span style="color:#cbd5e1;">Games, systems, embedded devices</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">Python — An Overview</div>
+      <div class="center-content">
+        <div class="big-icon">🐍</div>
+        <div class="big-title" style="color:#f59e0b;">Python</div>
+        <div class="big-subtitle">"Batteries included"</div>
+        <div style="display:grid;gap:12px;text-align:left;max-width:500px;margin:0 auto;width:100%;">
+          <div class="list-item" style="border-left-color:#f59e0b;">
+            <span style="color:#f59e0b;font-weight:600;">Creator:</span> <span style="color:#cbd5e1;">Guido van Rossum (1991)</span>
+          </div>
+          <div class="list-item" style="border-left-color:#f59e0b;">
+            <span style="color:#f59e0b;font-weight:600;">Design:</span> <span style="color:#cbd5e1;">Readability and simplicity first</span>
+          </div>
+          <div class="list-item" style="border-left-color:#f59e0b;">
+            <span style="color:#f59e0b;font-weight:600;">Known for:</span> <span style="color:#cbd5e1;">Clean, easy-to-understand syntax</span>
+          </div>
+          <div class="list-item" style="border-left-color:#f59e0b;">
+            <span style="color:#f59e0b;font-weight:600;">Status:</span> <span style="color:#cbd5e1;">One of the most popular languages today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">C++ vs Python — At a Glance</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th style="text-align:center;color:#3b82f6;">C++</th>
+              <th style="text-align:center;color:#f59e0b;">Python</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Speed</td>
+              <td style="text-align:center;color:#10b981;font-weight:600;">Very Fast ⚡</td>
+              <td style="text-align:center;color:#f59e0b;font-weight:600;">Slower 🐢</td>
+            </tr>
+            <tr>
+              <td>Syntax</td>
+              <td style="text-align:center;color:#ef4444;font-weight:600;">Complex ⚙️</td>
+              <td style="text-align:center;color:#10b981;font-weight:600;">Simple ✅</td>
+            </tr>
+            <tr>
+              <td>Memory Control</td>
+              <td style="text-align:center;color:#3b82f6;font-weight:600;">Manual 🎮</td>
+              <td style="text-align:center;color:#10b981;font-weight:600;">Automatic 🤖</td>
+            </tr>
+            <tr>
+              <td>Use Case</td>
+              <td style="text-align:center;color:#3b82f6;font-weight:600;">Systems, Games</td>
+              <td style="text-align:center;color:#f59e0b;font-weight:600;">AI, Web, Data</td>
+            </tr>
+            <tr>
+              <td>Learning Curve</td>
+              <td style="text-align:center;color:#ef4444;font-weight:600;">Steep 📈</td>
+              <td style="text-align:center;color:#10b981;font-weight:600;">Gentle 📉</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">Where is C++ Used?</div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">Game Development</div>
+          <div class="card-desc">Unreal Engine, AAA games</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💻</div>
+          <div class="card-title">Operating Systems</div>
+          <div class="card-desc">Windows, macOS, Linux</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔌</div>
+          <div class="card-title">Embedded Systems</div>
+          <div class="card-desc">Cars, medical, IoT</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">High-Frequency Trading</div>
+          <div class="card-desc">Financial systems</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide" data-section="INTRO">
+      <div class="slide-title">Where is Python Used?</div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <div class="card-title">AI & Machine Learning</div>
+          <div class="card-desc">TensorFlow, PyTorch</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <div class="card-title">Data Science</div>
+          <div class="card-desc">Pandas, NumPy</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Web Development</div>
+          <div class="card-desc">Django, Flask</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <div class="card-title">Automation</div>
+          <div class="card-desc">DevOps, testing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Variables & Data Types — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="type">int</span> age = <span class="number">25</span>;           <span class="comment">// Integer</span>
+<span class="type">double</span> price = <span class="number">19.99</span>;   <span class="comment">// Decimal</span>
+<span class="type">char</span> grade = <span class="string">'A'</span>;       <span class="comment">// Single character</span>
+<span class="type">string</span> name = <span class="string">"Ali"</span>;    <span class="comment">// Text</span>
+<span class="type">bool</span> isActive = <span class="type">true</span>;   <span class="comment">// True/False</span></pre>
+      </div>
+      <div class="small-grid">
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">int</div>
+          <div class="small-card-desc">Whole numbers</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">double</div>
+          <div class="small-card-desc">Decimals</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">bool</div>
+          <div class="small-card-desc">True/False</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Variables & Data Types — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre>age = <span class="number">25</span>           <span class="comment"># Integer</span>
+price = <span class="number">19.99</span>      <span class="comment"># Float</span>
+grade = <span class="string">'A'</span>        <span class="comment"># String</span>
+name = <span class="string">"Ali"</span>       <span class="comment"># String</span>
+is_active = <span class="type">True</span>   <span class="comment"># Boolean</span></pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">💡</span>
+        <span class="info-box-text"><strong>No need to declare types</strong> — Python figures it out automatically!</span>
+      </div>
+    </div>
+
+    <!-- Slide 13 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Input & Output — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="keyword">#include</span> <span class="string">&lt;iostream&gt;</span>
+<span class="type">using namespace</span> std;
+
+<span class="type">int</span> <span class="function">main</span>() {
+    <span class="type">string</span> name;
+    cout &lt;&lt; <span class="string">"Enter your name: "</span>;
+    cin &gt;&gt; name;
+    cout &lt;&lt; <span class="string">"Hello, "</span> &lt;&lt; name &lt;&lt; <span class="string">"!"</span>;
+    <span class="keyword">return</span> <span class="number">0</span>;
+}</pre>
+      </div>
+      <div class="small-grid">
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">cout</div>
+          <div class="small-card-desc">Output to screen</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">cin</div>
+          <div class="small-card-desc">Input from user</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">&lt;&lt; &gt;&gt;</div>
+          <div class="small-card-desc">Stream operators</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Input & Output — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre>name = <span class="function">input</span>(<span class="string">"Enter your name: "</span>)
+<span class="function">print</span>(<span class="string">"Hello, "</span> + name + <span class="string">"!"</span>)</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">✨</span>
+        <span class="info-box-text"><strong>Much shorter and more readable!</strong> Python keeps it simple.</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;">
+        <div class="small-card" style="flex:1;">
+          <div class="small-card-title" style="color:#f59e0b;">print()</div>
+          <div class="small-card-desc">Output to screen</div>
+        </div>
+        <div class="small-card" style="flex:1;">
+          <div class="small-card-title" style="color:#f59e0b;">input()</div>
+          <div class="small-card-desc">Input from user</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 15 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Conditional Statements — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="type">int</span> score = <span class="number">85</span>;
+<span class="keyword">if</span> (score &gt;= <span class="number">90</span>) {
+    cout &lt;&lt; <span class="string">"A"</span>;
+} <span class="keyword">else if</span> (score &gt;= <span class="number">80</span>) {
+    cout &lt;&lt; <span class="string">"B"</span>;
+} <span class="keyword">else</span> {
+    cout &lt;&lt; <span class="string">"C"</span>;
+}</pre>
+      </div>
+      <div class="tag-container">
+        <div class="tag tag-blue">if</div>
+        <div style="color:#64748b;">→</div>
+        <div class="tag tag-purple">else if</div>
+        <div style="color:#64748b;">→</div>
+        <div class="tag tag-green">else</div>
+      </div>
+    </div>
+
+    <!-- Slide 16 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Conditional Statements — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre>score = <span class="number">85</span>
+<span class="keyword">if</span> score &gt;= <span class="number">90</span>:
+    <span class="function">print</span>(<span class="string">"A"</span>)
+<span class="keyword">elif</span> score &gt;= <span class="number">80</span>:
+    <span class="function">print</span>(<span class="string">"B"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"C"</span>)</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">🎯</span>
+        <span class="info-box-text"><strong>No curly braces {}</strong> — Python uses indentation!</span>
+      </div>
+    </div>
+
+    <!-- Slide 17 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Loops — C++ (For Loop)</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+    cout &lt;&lt; i &lt;&lt; <span class="string">" "</span>;
+}
+<span class="comment">// Output: 0 1 2 3 4</span></pre>
+      </div>
+      <div class="small-grid">
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">init</div>
+          <div class="small-card-desc">int i = 0</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">condition</div>
+          <div class="small-card-desc">i &lt; 5</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">increment</div>
+          <div class="small-card-desc">i++</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 18 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Loops — Python (For Loop)</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">5</span>):
+    <span class="function">print</span>(i, end=<span class="string">" "</span>)
+<span class="comment"># Output: 0 1 2 3 4</span></pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">🪄</span>
+        <span class="info-box-text"><strong>range(5)</strong> generates 0 to 4 automatically — no manual setup needed!</span>
+      </div>
+    </div>
+
+    <!-- Slide 19 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Loops — C++ (While Loop)</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="type">int</span> i = <span class="number">0</span>;
+<span class="keyword">while</span> (i &lt; <span class="number">5</span>) {
+    cout &lt;&lt; i &lt;&lt; <span class="string">" "</span>;
+    i++;
+}</pre>
+      </div>
+      <div class="small-grid">
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">Initialize</div>
+          <div class="small-card-desc">int i = 0</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">Condition</div>
+          <div class="small-card-desc">i &lt; 5</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#3b82f6;">Update</div>
+          <div class="small-card-desc">i++</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 20 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Loops — Python (While Loop)</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre>i = <span class="number">0</span>
+<span class="keyword">while</span> i &lt; <span class="number">5</span>:
+    <span class="function">print</span>(i, end=<span class="string">" "</span>)
+    i += <span class="number">1</span></pre>
+      </div>
+      <div class="small-grid">
+        <div class="small-card">
+          <div class="small-card-title" style="color:#f59e0b;">Initialize</div>
+          <div class="small-card-desc">i = 0</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#f59e0b;">Condition</div>
+          <div class="small-card-desc">i &lt; 5</div>
+        </div>
+        <div class="small-card">
+          <div class="small-card-title" style="color:#f59e0b;">Update</div>
+          <div class="small-card-desc">i += 1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 21 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Functions — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="type">int</span> <span class="function">add</span>(<span class="type">int</span> a, <span class="type">int</span> b) {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="type">int</span> <span class="function">main</span>() {
+    cout &lt;&lt; <span class="function">add</span>(<span class="number">3</span>, <span class="number">5</span>);  <span class="comment">// Output: 8</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}</pre>
+      </div>
+      <div class="tag-container">
+        <div class="tag tag-blue">Return Type</div>
+        <div class="tag tag-purple">Parameters</div>
+        <div class="tag tag-green">return</div>
+      </div>
+    </div>
+
+    <!-- Slide 22 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Functions — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre><span class="keyword">def</span> <span class="function">add</span>(a, b):
+    <span class="keyword">return</span> a + b
+
+<span class="function">print</span>(add(<span class="number">3</span>, <span class="number">5</span>))  <span class="comment"># Output: 8</span></pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">✨</span>
+        <span class="info-box-text"><strong>def</strong> keyword is all you need! No return type needed.</span>
+      </div>
+    </div>
+
+    <!-- Slide 23 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Arrays & Lists — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="type">int</span> numbers[<span class="number">5</span>] = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>};
+cout &lt;&lt; numbers[<span class="number">0</span>];  <span class="comment">// Output: 10</span>
+<span class="comment">// Fixed size, must specify type</span></pre>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:14px;">
+        <div class="small-card" style="flex:1;">
+          <div class="small-card-title" style="color:#ef4444;">⚠️ Fixed Size</div>
+          <div class="small-card-desc">Must declare at start</div>
+        </div>
+        <div class="small-card" style="flex:1;">
+          <div class="small-card-title" style="color:#ef4444;">⚠️ Same Type</div>
+          <div class="small-card-desc">All elements must match</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 24 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Lists — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre>numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>]
+<span class="function">print</span>(numbers[<span class="number">0</span>])  <span class="comment"># Output: 10</span>
+<span class="comment"># Dynamic size, can mix types!</span>
+numbers.append(<span class="number">60</span>)</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">🎯</span>
+        <span class="info-box-text"><strong>Dynamic size</strong> — can grow, shrink, and mix types freely!</span>
+      </div>
+    </div>
+
+    <!-- Slide 25 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Object-Oriented Programming (OOP)</div>
+      <div class="slide-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">📦</div>
+            <div class="card-title">Class</div>
+            <div class="card-desc">Blueprint for creating objects</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎁</div>
+            <div class="card-title">Object</div>
+            <div class="card-desc">Instance of a class</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔒</div>
+            <div class="card-title">Encapsulation</div>
+            <div class="card-desc">Hiding internal details</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🧬</div>
+            <div class="card-title">Inheritance</div>
+            <div class="card-desc">Reusing code from parents</div>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:16px;">
+          <span style="font-size:20px;">🎭</span>
+          <span class="info-box-text"><strong>Polymorphism:</strong> Same action, different behaviors</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 26 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">OOP in C++ — Class Example</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="keyword">class</span> Car {
+<span class="keyword">public</span>:
+    <span class="type">string</span> brand;
+    <span class="type">int</span> year;
+
+    <span class="type">void</span> <span class="function">start</span>() {
+        cout &lt;&lt; brand &lt;&lt; <span class="string">" is starting!"</span>;
+    }
+};
+
+Car myCar;
+myCar.brand = <span class="string">"Toyota"</span>;
+myCar.start();</pre>
+      </div>
+      <div class="tag-container">
+        <div class="tag tag-blue">class</div>
+        <div class="tag tag-purple">public</div>
+        <div class="tag tag-green">void</div>
+      </div>
+    </div>
+
+    <!-- Slide 27 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">OOP in Python — Class Example</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre><span class="keyword">class</span> Car:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, brand, year):
+        <span class="keyword">self</span>.brand = brand
+        <span class="keyword">self</span>.year = year
+
+    <span class="keyword">def</span> <span class="function">start</span>(<span class="keyword">self</span>):
+        <span class="function">print</span>(<span class="string">f"{self.brand} is starting!"</span>)
+
+my_car = Car(<span class="string">"Toyota"</span>, <span class="number">2023</span>)
+my_car.start()</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">🐍</span>
+        <span class="info-box-text"><strong>__init__</strong> is the constructor — runs when object is created</span>
+      </div>
+    </div>
+
+    <!-- Slide 28 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Memory Management — C++</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#3b82f6;">
+          <div class="list-item-title">🎮 Manual Memory Management</div>
+          <div class="list-item-text">Programmer controls memory directly</div>
+        </div>
+        <div class="code-block" style="margin-top:12px;">
+          <div class="code-header">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+            <span class="code-filename">memory.cpp</span>
+          </div>
+          <pre><span class="type">int</span>* ptr = <span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>);  <span class="comment">// Allocate</span>
+<span class="keyword">delete</span> ptr;              <span class="comment">// Free memory</span></pre>
+        </div>
+        <div class="list-item" style="border-left-color:#ef4444;margin-top:12px;">
+          <div class="list-item-title">⚠️ Risk of Memory Leaks</div>
+          <div class="list-item-text">If not managed properly, memory leaks can occur</div>
+        </div>
+        <div class="info-box" style="margin-top:12px;">
+          <span style="font-size:20px;">💪</span>
+          <span class="info-box-text">Gives <strong>full control</strong> but requires <strong>responsibility</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 29 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Memory Management — Python</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#f59e0b;">
+          <div class="list-item-title">🤖 Automatic Memory Management</div>
+          <div class="list-item-text">Garbage collector handles everything</div>
+        </div>
+        <div class="code-block" style="margin-top:12px;">
+          <div class="code-header">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+            <span class="code-filename">memory.py</span>
+          </div>
+          <pre>data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]  <span class="comment"># Just create it!</span>
+<span class="comment"># No new or delete needed</span></pre>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;margin-top:12px;">
+          <div class="list-item-title">✅ Easier for Beginners</div>
+          <div class="list-item-text">Less error-prone, much safer</div>
+        </div>
+        <div class="info-box" style="margin-top:12px;">
+          <span style="font-size:20px;">🛡️</span>
+          <span class="info-box-text">Slightly less control, but <strong>much safer</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 30 -->
+    <div class="slide" data-section="CORE">
+      <div class="slide-title">Error Handling — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.cpp</span>
+        </div>
+        <pre><span class="keyword">try</span> {
+    <span class="type">int</span> result = <span class="number">10</span> / <span class="number">0</span>;
+} <span class="keyword">catch</span> (exception &e) {
+    cout &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; e.what();
+}</pre>
+      </div>
+      <div class="tag-container">
+        <div class="tag tag-blue">try</div>
+        <div class="tag tag-purple">catch</div>
+        <div class="tag tag-red">throw</div>
+      </div>
+      <div class="info-box" style="margin-top:12px;">
+        <span style="font-size:20px;">⚡</span>
+        <span class="info-box-text">Uses <strong>try</strong>, <strong>catch</strong>, and <strong>throw</strong> keywords</span>
+      </div>
+    </div>
+
+    <!-- Slide 31 -->
+    <div class="slide" data-section="ADVANCED">
+      <div class="slide-title">Error Handling — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">main.py</span>
+        </div>
+        <pre><span class="keyword">try</span>:
+    result = <span class="number">10</span> / <span class="number">0</span>
+<span class="keyword">except</span> ZeroDivisionError:
+    <span class="function">print</span>(<span class="string">"Cannot divide by zero!"</span>)
+<span class="keyword">finally</span>:
+    <span class="function">print</span>(<span class="string">"This always runs."</span>)</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">✨</span>
+        <span class="info-box-text">Cleaner syntax, easier to read — <strong>finally</strong> always executes!</span>
+      </div>
+    </div>
+
+    <!-- Slide 32 -->
+    <div class="slide" data-section="ADVANCED">
+      <div class="slide-title">File Handling — C++</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">file.cpp</span>
+        </div>
+        <pre><span class="keyword">#include</span> <span class="string">&lt;fstream&gt;</span>
+ofstream file(<span class="string">"data.txt"</span>);
+file &lt;&lt; <span class="string">"Hello, C++!"</span>;
+file.close();</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">📁</span>
+        <span class="info-box-text">Must <strong>manually close</strong> the file to avoid leaks</span>
+      </div>
+    </div>
+
+    <!-- Slide 33 -->
+    <div class="slide" data-section="ADVANCED">
+      <div class="slide-title">File Handling — Python</div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="code-filename">file.py</span>
+        </div>
+        <pre><span class="keyword">with</span> <span class="function">open</span>(<span class="string">"data.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> file:
+    file.write(<span class="string">"Hello, Python!"</span>)</pre>
+      </div>
+      <div class="info-box">
+        <span style="font-size:20px;">🎯</span>
+        <span class="info-box-text"><strong>with</strong> automatically closes the file — no leaks!</span>
+      </div>
+    </div>
+
+    <!-- Slide 34 -->
+    <div class="slide" data-section="ADVANCED">
+      <div class="slide-title">Libraries & Frameworks — C++</div>
+      <div class="slide-content">
+        <div class="h-card">
+          <div class="h-card-icon">📚</div>
+          <div>
+            <div class="h-card-title">STL (Standard Template Library)</div>
+            <div class="h-card-desc">Vectors, maps, algorithms</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">🚀</div>
+          <div>
+            <div class="h-card-title">Boost</div>
+            <div class="h-card-desc">Extended functionality</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">🖥️</div>
+          <div>
+            <div class="h-card-title">Qt</div>
+            <div class="h-card-desc">GUI applications</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">👁️</div>
+          <div>
+            <div class="h-card-title">OpenCV</div>
+            <div class="h-card-desc">Computer vision</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">🎮</div>
+          <div>
+            <div class="h-card-title">SFML / SDL</div>
+            <div class="h-card-desc">Game development</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 35 -->
+    <div class="slide" data-section="ADVANCED">
+      <div class="slide-title">Libraries & Frameworks — Python</div>
+      <div class="slide-content">
+        <div class="h-card">
+          <div class="h-card-icon">🔢</div>
+          <div>
+            <div class="h-card-title">NumPy & Pandas</div>
+            <div class="h-card-desc">Data manipulation</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">📊</div>
+          <div>
+            <div class="h-card-title">Matplotlib</div>
+            <div class="h-card-desc">Data visualization</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">🧠</div>
+          <div>
+            <div class="h-card-title">TensorFlow & PyTorch</div>
+            <div class="h-card-desc">Deep learning</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">🌐</div>
+          <div>
+            <div class="h-card-title">Django & Flask</div>
+            <div class="h-card-desc">Web development</div>
+          </div>
+        </div>
+        <div class="h-card">
+          <div class="h-card-icon">📡</div>
+          <div>
+            <div class="h-card-title">Requests</div>
+            <div class="h-card-desc">HTTP requests made easy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 36 -->
+    <div class="slide" data-section="CONCLUSION">
+      <div class="slide-title">When to Use C++?</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ High-performance applications</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Game engines and graphics</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ System-level programming</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Real-time systems</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ When memory control is critical</div>
+        </div>
+        <div class="center-content" style="padding:20px 0;">
+          <div class="big-icon">⚡</div>
+          <div class="big-title" style="color:#3b82f6;">Choose C++ for Power!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 37 -->
+    <div class="slide" data-section="CONCLUSION">
+      <div class="slide-title">When to Use Python?</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Rapid prototyping and development</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Data science and AI/ML</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Web applications</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Automation and scripting</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-text">✅ Beginners and education</div>
+        </div>
+        <div class="center-content" style="padding:20px 0;">
+          <div class="big-icon">🐍</div>
+          <div class="big-title" style="color:#f59e0b;">Choose Python for Speed of Development!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 38 -->
+    <div class="slide" data-section="CONCLUSION">
+      <div class="slide-title">Can They Work Together?</div>
+      <div class="slide-content">
+        <div class="info-box">
+          <span style="font-size:24px;">🤝</span>
+          <span class="info-box-text" style="font-size:16px;"><strong>Yes!</strong> Python can call C++ code for performance-critical parts.</span>
+        </div>
+        <div class="card-grid" style="margin-top:20px;">
+          <div class="card">
+            <div class="card-icon">🔗</div>
+            <div class="card-title">Cython</div>
+            <div class="card-desc">Write C-like code in Python</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">PyBind11</div>
+            <div class="card-desc">Expose C++ libraries to Python</div>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:20px;">
+          <span style="font-size:20px;">🌟</span>
+          <span class="info-box-text"><strong>Best of both worlds:</strong> Python's ease + C++'s speed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 39 -->
+    <div class="slide" data-section="CONCLUSION">
+      <div class="slide-title">Key Takeaways</div>
+      <div class="slide-content">
+        <div class="list-item" style="border-left-color:#3b82f6;">
+          <div class="list-item-title">1. C++ = Power, speed, control</div>
+          <div class="list-item-text">Best for systems and performance-critical apps</div>
+        </div>
+        <div class="list-item" style="border-left-color:#f59e0b;">
+          <div class="list-item-title">2. Python = Simplicity, readability, versatility</div>
+          <div class="list-item-text">Best for rapid development and AI</div>
+        </div>
+        <div class="list-item" style="border-left-color:#8b5cf6;">
+          <div class="list-item-title">3. Both are object-oriented and widely used</div>
+          <div class="list-item-text">OOP principles apply to both</div>
+        </div>
+        <div class="list-item" style="border-left-color:#10b981;">
+          <div class="list-item-title">4. Learning both makes you versatile</div>
+          <div class="list-item-text">Double your opportunities!</div>
+        </div>
+        <div class="list-item" style="border-left-color:#ec4899;">
+          <div class="list-item-title">5. The best language depends on the problem</div>
+          <div class="list-item-text">No one-size-fits-all solution</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 40 -->
+    <div class="slide" data-section="CONCLUSION">
+      <div class="slide-title">Thank You & Resources</div>
+      <div class="center-content">
+        <div class="big-icon">🎉</div>
+        <div class="big-title" style="color:#f8fafc;">Thank You for Listening!</div>
+        <div class="big-subtitle">Resources to Learn More</div>
+        <div style="display:grid;gap:12px;text-align:left;max-width:500px;margin:20px auto;width:100%;">
+          <div class="list-item" style="border-left-color:#3b82f6;">
+            <span style="color:#3b82f6;font-weight:600;">📘 C++:</span> <span style="color:#cbd5e1;">cppreference.com, learncpp.com</span>
+          </div>
+          <div class="list-item" style="border-left-color:#f59e0b;">
+            <span style="color:#f59e0b;font-weight:600;">🐍 Python:</span> <span style="color:#cbd5e1;">python.org, realpython.com</span>
+          </div>
+          <div class="list-item" style="border-left-color:#8b5cf6;">
+            <span style="color:#8b5cf6;font-weight:600;">🎓 Practice:</span> <span style="color:#cbd5e1;">LeetCode, HackerRank, Codecademy</span>
+          </div>
+          <div class="list-item" style="border-left-color:#10b981;">
+            <span style="color:#10b981;font-weight:600;">📺 YouTube:</span> <span style="color:#cbd5e1;">The Cherno (C++), Corey Schafer (Python)</span>
+          </div>
+        </div>
+        <div style="margin-top:24px;font-size:18px;color:#60a5fa;font-weight:700;">Questions? 🤔</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()">
+      <span>◀</span> Previous
+    </button>
+
+    <div class="dots-container" id="dotNav"></div>
+
+    <button class="nav-btn nav-btn-primary" id="nextBtn" onclick="nextSlide()">
+      Next <span>▶</span>
+    </button>
+  </div>
+
+  <div class="footer-hint">
+    Use ← → arrow keys or buttons to navigate
+  </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function updateSlide() {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[currentSlide].classList.add('active');
+
+  document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+
+  const section = slides[currentSlide].dataset.section;
+  const badge = document.getElementById('sectionBadge');
+  badge.textContent = section;
+
+  const colors = {
+    'INTRO': 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+    'CORE': 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
+    'ADVANCED': 'linear-gradient(135deg, #10b981, #059669)',
+    'CONCLUSION': 'linear-gradient(135deg, #f59e0b, #d97706)'
+  };
+  badge.style.background = colors[section] || colors['INTRO'];
+
+  const progress = ((currentSlide + 1) / totalSlides) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+
+  document.getElementById('prevBtn').disabled = currentSlide === 0;
+  document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+  updateDots();
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides - 1) {
+    currentSlide++;
+    updateSlide();
+  }
+}
+
+function prevSlide() {
+  if (currentSlide > 0) {
+    currentSlide--;
+    updateSlide();
+  }
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  updateSlide();
+}
+
+function updateDots() {
+  const container = document.getElementById('dotNav');
+  container.innerHTML = '';
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'dot-nav' + (i === currentSlide ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dot.title = 'Slide ' + (i + 1);
+    container.appendChild(dot);
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
+
+updateDots();
+updateSlide();
+</script>
+
+</body>
+</html>
